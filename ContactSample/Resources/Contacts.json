@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "first_name": "Amitabh",
+        "last_name": "Bachchan",
+        "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/007/original/ab.jpg?1464516610",
+        "favorite": false,
+        "url": "https://gojek-contacts-app.herokuapp.com/contacts/1.json"
+    },
+    {
+        "id": 2,
+        "first_name": "Shahrukh",
+        "last_name": "Khan",
+        "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/008/original/srk.jpg?1464516694",
+        "favorite": false,
+        "url": "https://gojek-contacts-app.herokuapp.com/contacts/1.json"
+    }
+]

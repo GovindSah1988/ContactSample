@@ -1,5 +1,5 @@
 //
-//  AppDelegate.swift
+//  CSAppDelegate.swift
 //  ContactSample
 //
 //  Created by Govind Sah on 06/07/19.
@@ -9,13 +9,14 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class CSAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        CSAppearanceManager.setupAppearance()
         return true
     }
 

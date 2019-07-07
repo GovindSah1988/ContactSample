@@ -7,13 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C2FEE49122D127C500518CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE49022D127C500518CF4 /* AppDelegate.swift */; };
-		C2FEE49322D127C500518CF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE49222D127C500518CF4 /* ViewController.swift */; };
+		C219BAC422D1AE410010A87C /* CSContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C219BAC322D1AE410010A87C /* CSContactDetailViewController.swift */; };
+		C219BAC822D1AF340010A87C /* CSAddEditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C219BAC722D1AF340010A87C /* CSAddEditContactViewController.swift */; };
+		C21A424222D246DC005F5A4E /* CSDetailFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A424022D246DC005F5A4E /* CSDetailFieldTableViewCell.swift */; };
+		C21A424322D246DC005F5A4E /* CSDetailFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C21A424122D246DC005F5A4E /* CSDetailFieldTableViewCell.xib */; };
+		C21A424622D272F3005F5A4E /* Contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = C21A424522D272F3005F5A4E /* Contacts.json */; };
+		C2FEE49122D127C500518CF4 /* CSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE49022D127C500518CF4 /* CSAppDelegate.swift */; };
+		C2FEE49322D127C500518CF4 /* CSContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE49222D127C500518CF4 /* CSContactsViewController.swift */; };
 		C2FEE49622D127C600518CF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2FEE49422D127C600518CF4 /* Main.storyboard */; };
 		C2FEE49822D127D800518CF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2FEE49722D127D800518CF4 /* Assets.xcassets */; };
 		C2FEE49B22D127D800518CF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2FEE49922D127D800518CF4 /* LaunchScreen.storyboard */; };
 		C2FEE4A622D127DD00518CF4 /* ContactSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4A522D127DD00518CF4 /* ContactSampleTests.swift */; };
 		C2FEE4B122D127DD00518CF4 /* ContactSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4B022D127DD00518CF4 /* ContactSampleUITests.swift */; };
+		C2FEE4CE22D12DCC00518CF4 /* CSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4CD22D12DCC00518CF4 /* CSConstants.swift */; };
+		C2FEE4D022D12DE700518CF4 /* CSNetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4CF22D12DE700518CF4 /* CSNetworkConstants.swift */; };
+		C2FEE4D222D12E0200518CF4 /* CSStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4D122D12E0200518CF4 /* CSStoryboardExtension.swift */; };
+		C2FEE4D422D12E1300518CF4 /* CSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4D322D12E1300518CF4 /* CSExtensions.swift */; };
+		C2FEE4D622D12F1700518CF4 /* CSAgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4D522D12F1700518CF4 /* CSAgentProtocol.swift */; };
+		C2FEE4D822D12F2C00518CF4 /* CSBaseAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4D722D12F2C00518CF4 /* CSBaseAgent.swift */; };
+		C2FEE4DA22D12F3F00518CF4 /* CSNetworkAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4D922D12F3F00518CF4 /* CSNetworkAgent.swift */; };
+		C2FEE4DC22D12F5100518CF4 /* CSLocalAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4DB22D12F5100518CF4 /* CSLocalAgent.swift */; };
+		C2FEE4DE22D12F6400518CF4 /* CSAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4DD22D12F6400518CF4 /* CSAPIManager.swift */; };
+		C2FEE4E022D12F7600518CF4 /* CSEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4DF22D12F7600518CF4 /* CSEndPoint.swift */; };
+		C2FEE4E222D12F8600518CF4 /* CSRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4E122D12F8600518CF4 /* CSRequestable.swift */; };
+		C2FEE4E422D12F9700518CF4 /* CSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4E322D12F9700518CF4 /* CSResponse.swift */; };
+		C2FEE4E622D12FA500518CF4 /* CSResponseBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4E522D12FA500518CF4 /* CSResponseBaseModel.swift */; };
+		C2FEE4E822D130C100518CF4 /* CSContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4E722D130C100518CF4 /* CSContactTableViewCell.swift */; };
+		C2FEE4EA22D1334700518CF4 /* CSHomeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4E922D1334700518CF4 /* CSHomeRequest.swift */; };
+		C2FEE4EC22D1339E00518CF4 /* CSHomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4EB22D1339E00518CF4 /* CSHomePresenter.swift */; };
+		C2FEE4EE22D134DC00518CF4 /* CSContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4ED22D134DC00518CF4 /* CSContact.swift */; };
+		C2FEE4F022D13D0500518CF4 /* CSContactResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4EF22D13D0500518CF4 /* CSContactResponse.swift */; };
+		C2FEE4F322D1499F00518CF4 /* CSAppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEE4F222D1499F00518CF4 /* CSAppearanceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +58,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C219BAC322D1AE410010A87C /* CSContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactDetailViewController.swift; sourceTree = "<group>"; };
+		C219BAC722D1AF340010A87C /* CSAddEditContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAddEditContactViewController.swift; sourceTree = "<group>"; };
+		C21A424022D246DC005F5A4E /* CSDetailFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSDetailFieldTableViewCell.swift; sourceTree = "<group>"; };
+		C21A424122D246DC005F5A4E /* CSDetailFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CSDetailFieldTableViewCell.xib; sourceTree = "<group>"; };
+		C21A424522D272F3005F5A4E /* Contacts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contacts.json; sourceTree = "<group>"; };
 		C2FEE48D22D127C500518CF4 /* ContactSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2FEE49022D127C500518CF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C2FEE49222D127C500518CF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C2FEE49022D127C500518CF4 /* CSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAppDelegate.swift; sourceTree = "<group>"; };
+		C2FEE49222D127C500518CF4 /* CSContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactsViewController.swift; sourceTree = "<group>"; };
 		C2FEE49522D127C600518CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C2FEE49722D127D800518CF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2FEE49A22D127D800518CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +76,25 @@
 		C2FEE4AC22D127DD00518CF4 /* ContactSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2FEE4B022D127DD00518CF4 /* ContactSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSampleUITests.swift; sourceTree = "<group>"; };
 		C2FEE4B222D127DD00518CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2FEE4CD22D12DCC00518CF4 /* CSConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSConstants.swift; sourceTree = "<group>"; };
+		C2FEE4CF22D12DE700518CF4 /* CSNetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSNetworkConstants.swift; sourceTree = "<group>"; };
+		C2FEE4D122D12E0200518CF4 /* CSStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSStoryboardExtension.swift; sourceTree = "<group>"; };
+		C2FEE4D322D12E1300518CF4 /* CSExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSExtensions.swift; sourceTree = "<group>"; };
+		C2FEE4D522D12F1700518CF4 /* CSAgentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAgentProtocol.swift; sourceTree = "<group>"; };
+		C2FEE4D722D12F2C00518CF4 /* CSBaseAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSBaseAgent.swift; sourceTree = "<group>"; };
+		C2FEE4D922D12F3F00518CF4 /* CSNetworkAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSNetworkAgent.swift; sourceTree = "<group>"; };
+		C2FEE4DB22D12F5100518CF4 /* CSLocalAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSLocalAgent.swift; sourceTree = "<group>"; };
+		C2FEE4DD22D12F6400518CF4 /* CSAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAPIManager.swift; sourceTree = "<group>"; };
+		C2FEE4DF22D12F7600518CF4 /* CSEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSEndPoint.swift; sourceTree = "<group>"; };
+		C2FEE4E122D12F8600518CF4 /* CSRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSRequestable.swift; sourceTree = "<group>"; };
+		C2FEE4E322D12F9700518CF4 /* CSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSResponse.swift; sourceTree = "<group>"; };
+		C2FEE4E522D12FA500518CF4 /* CSResponseBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSResponseBaseModel.swift; sourceTree = "<group>"; };
+		C2FEE4E722D130C100518CF4 /* CSContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactTableViewCell.swift; sourceTree = "<group>"; };
+		C2FEE4E922D1334700518CF4 /* CSHomeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSHomeRequest.swift; sourceTree = "<group>"; };
+		C2FEE4EB22D1339E00518CF4 /* CSHomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSHomePresenter.swift; sourceTree = "<group>"; };
+		C2FEE4ED22D134DC00518CF4 /* CSContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContact.swift; sourceTree = "<group>"; };
+		C2FEE4EF22D13D0500518CF4 /* CSContactResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactResponse.swift; sourceTree = "<group>"; };
+		C2FEE4F222D1499F00518CF4 /* CSAppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAppearanceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +122,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C219BAC222D1AD070010A87C /* ContactDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C21A423F22D2466B005F5A4E /* Views */,
+				C219BAC522D1AE940010A87C /* Controllers */,
+			);
+			path = ContactDetail;
+			sourceTree = "<group>";
+		};
+		C219BAC522D1AE940010A87C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C219BAC322D1AE410010A87C /* CSContactDetailViewController.swift */,
+				C219BAC722D1AF340010A87C /* CSAddEditContactViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C21A423F22D2466B005F5A4E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C21A424022D246DC005F5A4E /* CSDetailFieldTableViewCell.swift */,
+				C21A424122D246DC005F5A4E /* CSDetailFieldTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C21A424422D272D6005F5A4E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C21A424522D272F3005F5A4E /* Contacts.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C2FEE48422D127C500518CF4 = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +180,9 @@
 		C2FEE48F22D127C500518CF4 /* ContactSample */ = {
 			isa = PBXGroup;
 			children = (
-				C2FEE49022D127C500518CF4 /* AppDelegate.swift */,
-				C2FEE49222D127C500518CF4 /* ViewController.swift */,
+				C2FEE4BE22D12C7300518CF4 /* Source */,
+				C21A424422D272D6005F5A4E /* Resources */,
+				C2FEE49022D127C500518CF4 /* CSAppDelegate.swift */,
 				C2FEE49422D127C600518CF4 /* Main.storyboard */,
 				C2FEE49722D127D800518CF4 /* Assets.xcassets */,
 				C2FEE49922D127D800518CF4 /* LaunchScreen.storyboard */,
@@ -123,6 +207,154 @@
 				C2FEE4B222D127DD00518CF4 /* Info.plist */,
 			);
 			path = ContactSampleUITests;
+			sourceTree = "<group>";
+		};
+		C2FEE4BE22D12C7300518CF4 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C219BAC222D1AD070010A87C /* ContactDetail */,
+				C2FEE4C022D12CAB00518CF4 /* Network */,
+				C2FEE4BF22D12C9100518CF4 /* Models */,
+				C2FEE4C522D12CEB00518CF4 /* Common */,
+				C2FEE4C722D12D1B00518CF4 /* Home */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		C2FEE4BF22D12C9100518CF4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4ED22D134DC00518CF4 /* CSContact.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C2FEE4C022D12CAB00518CF4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4C422D12CDD00518CF4 /* Clients */,
+				C2FEE4C322D12CD200518CF4 /* Interface */,
+				C2FEE4C222D12CC700518CF4 /* Requests */,
+				C2FEE4C122D12CBB00518CF4 /* Response */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C2FEE4C122D12CBB00518CF4 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4E322D12F9700518CF4 /* CSResponse.swift */,
+				C2FEE4E522D12FA500518CF4 /* CSResponseBaseModel.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		C2FEE4C222D12CC700518CF4 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4DF22D12F7600518CF4 /* CSEndPoint.swift */,
+				C2FEE4E122D12F8600518CF4 /* CSRequestable.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		C2FEE4C322D12CD200518CF4 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4DD22D12F6400518CF4 /* CSAPIManager.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		C2FEE4C422D12CDD00518CF4 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4D522D12F1700518CF4 /* CSAgentProtocol.swift */,
+				C2FEE4D722D12F2C00518CF4 /* CSBaseAgent.swift */,
+				C2FEE4D922D12F3F00518CF4 /* CSNetworkAgent.swift */,
+				C2FEE4DB22D12F5100518CF4 /* CSLocalAgent.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		C2FEE4C522D12CEB00518CF4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4F122D1445C00518CF4 /* Appearance */,
+				C2FEE4C622D12CFC00518CF4 /* Utilities */,
+				C2FEE4CD22D12DCC00518CF4 /* CSConstants.swift */,
+				C2FEE4CF22D12DE700518CF4 /* CSNetworkConstants.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C2FEE4C622D12CFC00518CF4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4D122D12E0200518CF4 /* CSStoryboardExtension.swift */,
+				C2FEE4D322D12E1300518CF4 /* CSExtensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C2FEE4C722D12D1B00518CF4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4CC22D12D4700518CF4 /* Views */,
+				C2FEE4CB22D12D3E00518CF4 /* Response */,
+				C2FEE4CA22D12D3600518CF4 /* Request */,
+				C2FEE4C922D12D2D00518CF4 /* Presenter */,
+				C2FEE4C822D12D2200518CF4 /* Controllers */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C2FEE4C822D12D2200518CF4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE49222D127C500518CF4 /* CSContactsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C2FEE4C922D12D2D00518CF4 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4EB22D1339E00518CF4 /* CSHomePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		C2FEE4CA22D12D3600518CF4 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4E922D1334700518CF4 /* CSHomeRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		C2FEE4CB22D12D3E00518CF4 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4EF22D13D0500518CF4 /* CSContactResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		C2FEE4CC22D12D4700518CF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4E722D130C100518CF4 /* CSContactTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C2FEE4F122D1445C00518CF4 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEE4F222D1499F00518CF4 /* CSAppearanceManager.swift */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +419,7 @@
 		C2FEE48522D127C500518CF4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CS;
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Govind Sah";
@@ -232,6 +465,8 @@
 				C2FEE49B22D127D800518CF4 /* LaunchScreen.storyboard in Resources */,
 				C2FEE49822D127D800518CF4 /* Assets.xcassets in Resources */,
 				C2FEE49622D127C600518CF4 /* Main.storyboard in Resources */,
+				C21A424322D246DC005F5A4E /* CSDetailFieldTableViewCell.xib in Resources */,
+				C21A424622D272F3005F5A4E /* Contacts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +491,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2FEE49322D127C500518CF4 /* ViewController.swift in Sources */,
-				C2FEE49122D127C500518CF4 /* AppDelegate.swift in Sources */,
+				C2FEE4E422D12F9700518CF4 /* CSResponse.swift in Sources */,
+				C2FEE4F322D1499F00518CF4 /* CSAppearanceManager.swift in Sources */,
+				C2FEE4EE22D134DC00518CF4 /* CSContact.swift in Sources */,
+				C2FEE4EC22D1339E00518CF4 /* CSHomePresenter.swift in Sources */,
+				C2FEE4DE22D12F6400518CF4 /* CSAPIManager.swift in Sources */,
+				C2FEE4D022D12DE700518CF4 /* CSNetworkConstants.swift in Sources */,
+				C21A424222D246DC005F5A4E /* CSDetailFieldTableViewCell.swift in Sources */,
+				C219BAC422D1AE410010A87C /* CSContactDetailViewController.swift in Sources */,
+				C219BAC822D1AF340010A87C /* CSAddEditContactViewController.swift in Sources */,
+				C2FEE49322D127C500518CF4 /* CSContactsViewController.swift in Sources */,
+				C2FEE4DA22D12F3F00518CF4 /* CSNetworkAgent.swift in Sources */,
+				C2FEE4F022D13D0500518CF4 /* CSContactResponse.swift in Sources */,
+				C2FEE4E222D12F8600518CF4 /* CSRequestable.swift in Sources */,
+				C2FEE4DC22D12F5100518CF4 /* CSLocalAgent.swift in Sources */,
+				C2FEE4D622D12F1700518CF4 /* CSAgentProtocol.swift in Sources */,
+				C2FEE4E022D12F7600518CF4 /* CSEndPoint.swift in Sources */,
+				C2FEE4EA22D1334700518CF4 /* CSHomeRequest.swift in Sources */,
+				C2FEE49122D127C500518CF4 /* CSAppDelegate.swift in Sources */,
+				C2FEE4D822D12F2C00518CF4 /* CSBaseAgent.swift in Sources */,
+				C2FEE4D422D12E1300518CF4 /* CSExtensions.swift in Sources */,
+				C2FEE4E822D130C100518CF4 /* CSContactTableViewCell.swift in Sources */,
+				C2FEE4E622D12FA500518CF4 /* CSResponseBaseModel.swift in Sources */,
+				C2FEE4CE22D12DCC00518CF4 /* CSConstants.swift in Sources */,
+				C2FEE4D222D12E0200518CF4 /* CSStoryboardExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
