@@ -20,6 +20,7 @@ struct CSConstants {
         static let commonErrorInfo = "Something Went Wrong. Unable to connect to Server!!"
         static let homeTitle = "Contact"
         static let emptyContent = "No Contents To Show!!"
+        static let editAddSuccessMessage = "Contact is successfully updated."
     }
     
     /// add all the view identifiers here
@@ -33,6 +34,14 @@ struct CSConstants {
     struct CSStoryboardConstants {
         static let main = "Main"
     }
+    
+    struct HeaderConstants {
+        static let contentType = "Content-Type"
+        static let accept = "Accept"
+        static let contentTypeJson = "application/json"
+        static let acceptJson = "application/json"
+    }
+
 }
 
 enum CSContactDetailRow: Int {
@@ -76,4 +85,5 @@ enum CSCachePolicy: Int {
 enum CSRequestMethod: String {
     case get = "GET"
     case post = "POST"
+    case put = "PUT"
 }

@@ -17,9 +17,11 @@ class CSContactDetailViewController: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableViewHeightALC: NSLayoutConstraint!
 
     @IBOutlet weak var profileIV: UIImageView!
+    @IBOutlet weak var nameLB: UILabel!
     @IBOutlet weak var gradientView: UIView!
     
     @IBOutlet weak var messageBT: UIButton!
@@ -27,9 +29,11 @@ class CSContactDetailViewController: UIViewController {
     @IBOutlet weak var emailBT: UIButton!
     @IBOutlet weak var favouriteBT: UIButton!
     
+    var detailPresenter: CSContactDetailPresenter!
+    
     var contact: CSContact!
     var gradient: CAGradientLayer!
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -76,10 +80,34 @@ class CSContactDetailViewController: UIViewController {
     private func initialSetup() {
         registerCells()
         self.tableViewHeightALC.constant = CGFloat(CSContactDetailViewController.CSConstantsValues.numberOfCells) * CSContactDetailViewController.CSConstantsValues.rowHeight
+        setupContactDetails()
+        fetchContactDetail()
         setupButtons()
         setupNavigationBar()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
+    private func fetchContactDetail() {
+        if let contact = contact {
+            activityIndicator.startAnimating()
+            detailPresenter = CSContactDetailPresenter(delegate: self)
+            detailPresenter.fetchContactDetail(contact: contact)
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    private func setupContactDetails() {
+        if nil != contact {
+            if let profilePicUrl = contact.profilePic {
+                self.profileIV.loadImage(fromURL: profilePicUrl)
+            }
+            self.favouriteBT.isSelected = contact.favorite ?? false
+            self.nameLB.text = contact.name
+            self.tableView.reloadData()
+        }
+    }
+
     private func registerCells() {
         tableView.register(UINib(nibName: CSDetailFieldTableViewCell.className, bundle: nil), forCellReuseIdentifier: CSDetailFieldTableViewCell.className)
     }
@@ -104,11 +132,45 @@ class CSContactDetailViewController: UIViewController {
     
     @objc func editContactTapped(_ button: UIBarButtonItem) {
         let editContactVC = CSAddEditContactViewController.editAddContactVC(editMode: .edit)
+        editContactVC.contact = contact
+        editContactVC.editDelegate = self
         self.navigationController?.pushFromBottomToTop(editContactVC)
     }
 
     @IBAction func deleteContact(_ sender: Any) {
+        print("Delete Contact")
     }
+    
+    @IBAction func messageTapped(_ sender: UIButton) {
+        print("messageTapped")
+        if false == contact.phoneNumber?.isEmpty {
+            // Make proper message API call
+        }
+    }
+    
+    @IBAction func callTapped(_ sender: UIButton) {
+        print("callTapped")
+        if let phoneNum = contact.phoneNumber, false == phoneNum.isEmpty {
+            // Make proper phone call
+            if let url = URL(string: "tel://\(phoneNum.removeSpaceAndSpecialCharacter())") {
+                UIApplication.shared.open(url)
+            }
+        }
+    }
+    
+    @IBAction func emailTapped(_ sender: UIButton) {
+        print("emailTapped")
+        if false == contact.email?.isEmpty {
+            // Make proper email API call
+        }
+    }
+    
+    @IBAction func favouriteTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        // Make proper API call
+        print("favouriteTapped")
+    }
+
 }
 
 extension CSContactDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -118,11 +180,41 @@ extension CSContactDetailViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CSDetailFieldTableViewCell.className, for: indexPath) as! CSDetailFieldTableViewCell
-        cell.titleLB.text = CSContactDetailRow(rawValue: indexPath.row + 2)?.description
+        cell.entryTF.isEnabled = false
+        if let contactRow = CSContactDetailRow(rawValue: indexPath.row + 2) {
+            var textFieldText: String?
+            switch contactRow {
+            case .email:
+                textFieldText = contact.email
+            case .mobile:
+                textFieldText = contact.phoneNumber
+            default:
+                textFieldText = ""
+            }
+            cell.configure(type: contactRow, title: contactRow.description, textFieldText: textFieldText)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CSContactDetailViewController.CSConstantsValues.rowHeight
+    }
+}
+
+extension CSContactDetailViewController: CSContactDetailPresenterOutput {
+    func detailFetched(contact: CSContact?, error: CSError?) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.activityIndicator.stopAnimating()
+        if let aContact = contact {
+            self.contact = aContact
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension CSContactDetailViewController: CSEditContactDelegate {
+    func contactEdited(contact: CSContact) {
+        self.contact = contact
+        self.setupContactDetails()
     }
 }

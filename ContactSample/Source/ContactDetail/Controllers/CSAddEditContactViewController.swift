@@ -13,6 +13,10 @@ enum CSContactEditMode {
     case add
 }
 
+protocol CSEditContactDelegate: NSObject {
+    func contactEdited(contact: CSContact)
+}
+
 class CSAddEditContactViewController: UIViewController {
     
     struct CSConstantsValues {
@@ -25,12 +29,17 @@ class CSAddEditContactViewController: UIViewController {
     @IBOutlet weak var tableViewHeightALC: NSLayoutConstraint!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var profileIV: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var editMode: CSContactEditMode!
     
     var contact: CSContact?
+    weak var editDelegate: CSEditContactDelegate?
+    
     var gradient: CAGradientLayer!
 
+    var addEditPresenter: CSAddEditContactPresenter?
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -77,8 +86,18 @@ class CSAddEditContactViewController: UIViewController {
     
     private func initialSetup() {
         registerCells()
+        setupUI()
         self.tableViewHeightALC.constant = CGFloat(CSConstantsValues.numberOfCells) * CSConstantsValues.rowHeight
         setupNavigationBar()
+    }
+    
+    private func setupUI() {
+        if editMode == .edit, let contact = contact {
+            if let profilePic = contact.profilePic {
+                self.profileIV.loadImage(fromURL: profilePic)
+            }
+            self.tableView.reloadData()
+        }
     }
     
     private func registerCells() {
@@ -88,6 +107,9 @@ class CSAddEditContactViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelContactTapped))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneContactTapped))
+        if editMode == .add {
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+        }
     }
     
     @objc func cancelContactTapped(_ button: UIBarButtonItem) {
@@ -95,10 +117,19 @@ class CSAddEditContactViewController: UIViewController {
     }
     
     @objc func doneContactTapped(_ button: UIBarButtonItem) {
-        self.navigationController?.popFromTopToBottom()
+        if let contact = contact {
+            self.activityIndicator.startAnimating()
+            addEditPresenter = CSAddEditContactPresenter(delegate: self)
+            addEditPresenter?.addEdit(contact: contact, editMode: editMode)
+        }
     }
     
     @IBAction func uploadProfilePic(_ sender: Any) {
+    }
+    
+    // add logic to test the validity of each text field
+    private func canCreateContact() -> Bool {
+        return (false == contact?.firstName.isEmpty) && (false == contact?.lastName.isEmpty) && (false == contact?.phoneNumber?.isEmpty) && (false == contact?.email?.isEmpty)
     }
 }
 
@@ -109,7 +140,22 @@ extension CSAddEditContactViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CSDetailFieldTableViewCell.className, for: indexPath) as! CSDetailFieldTableViewCell
-        cell.titleLB.text = CSContactDetailRow(rawValue: indexPath.row)?.description
+        cell.entryTF.isEnabled = true
+        cell.editFieldDelegate = self
+        if let contactRow = CSContactDetailRow(rawValue: indexPath.row) {
+            var textFieldText: String?
+            switch contactRow {
+            case .email:
+                textFieldText = contact?.email
+            case .mobile:
+                textFieldText = contact?.phoneNumber
+            case .firstName:
+                textFieldText = contact?.firstName
+            case .lastName:
+                textFieldText = contact?.lastName
+            }
+            cell.configure(type: contactRow, title: contactRow.description, textFieldText: textFieldText)
+        }
         return cell
     }
     
@@ -117,3 +163,39 @@ extension CSAddEditContactViewController: UITableViewDelegate, UITableViewDataSo
         return CSConstantsValues.rowHeight
     }
 }
+
+extension CSAddEditContactViewController: CSAddEditContactPresenterOutput {
+    func didFinishAddEdit(contact: CSContact?, error: CSError?) {
+        self.activityIndicator.stopAnimating()
+        // dismiss controller
+        if nil ==  error, let contact = contact {
+            NotificationCenter.default.post(name: Notification.Name.ContentDidUpdate, object: nil)
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.editAddSuccessMessage) { [weak self] (_) in
+                self?.editDelegate?.contactEdited(contact: contact)
+                self?.navigationController?.popFromTopToBottom()
+            }
+        } else {
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.commonErrorInfo)
+        }
+    }
+}
+
+extension CSAddEditContactViewController: CSEditTextFieldDelegate {
+    func textEdited(finalText: String?, type: CSContactDetailRow) {
+        if nil == contact {
+            contact = CSContact(id: nil)
+        }
+        switch type {
+        case .email:
+            contact?.email = finalText
+        case .mobile:
+            contact?.phoneNumber = finalText
+        case .firstName:
+            contact?.firstName = finalText!
+        case .lastName:
+            contact?.lastName = finalText!
+        }
+        self.navigationItem.rightBarButtonItem?.isEnabled = canCreateContact()
+    }
+}
+

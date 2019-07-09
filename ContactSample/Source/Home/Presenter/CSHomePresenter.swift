@@ -8,10 +8,10 @@
 
 import UIKit
 
-typealias CSContactListResponse = ([CSContact]?, Error?) -> Void
+//typealias CSContactListResponse = ([CSContact]?, Error?) -> Void
 
 protocol CSHomePresenterOutput: class {
-    func contacts(_ contacts: [CSContact]?, error: CSError?)
+    func contactsFetched(error: CSError?)
 }
 
 /**
@@ -22,6 +22,8 @@ protocol CSHomePresenterInput: class {
     func numberOfContactsSection() -> Int
     func numberOfContacts(for section: Int) -> Int
     func contact(at section: Int, row: Int) -> CSContact?
+    func sectionTitles() -> [String]?
+    func sectionTitle(at section: Int) -> String
 }
 
 class CSHomePresenter: NSObject {
@@ -33,60 +35,66 @@ class CSHomePresenter: NSObject {
     // weak can never be let as the ARC can set nil to this variable whenever it needs to
     weak private var output: CSHomePresenterOutput?
     
-    private var contacts: [CSContact]?
-    
+    private var contactsMappingList = [String: [CSContact]]()
+
     init(delegate: CSHomePresenterOutput) {
         output = delegate
     }
     
+    private func contactsForSection(for section: Int) -> [CSContact] {
+        var contactListForSection:[CSContact]? = [CSContact]()
+        let sectionKey = contactsMappingList.keys.sorted()[section]
+        contactListForSection = contactsMappingList[sectionKey]
+        return contactListForSection ?? [CSContact]()
+    }
 }
 
 extension CSHomePresenter: CSHomePresenterInput {
     
     func numberOfContactsSection() -> Int {
-        return contacts?.count ?? 0
+        return contactsMappingList.keys.count
     }
     
     func numberOfContacts(for section: Int) -> Int {
-        return 2
+        return contactsForSection(for: section).count
     }
     
     func contact(at section: Int, row: Int) -> CSContact? {
-        guard let contacts = contacts, contacts.count > 0 else {
+        let contacts = contactsForSection(for: section)
+        guard contacts.count > row else {
             return nil
         }
-        return contacts[0]
+        return contacts[row]
+    }
+    
+    func sectionTitles() -> [String]? {
+        return contactsMappingList.keys.sorted()
+    }
+    
+    func sectionTitle(at section: Int) -> String {
+        let sectionKey = contactsMappingList.keys.sorted()[section]
+        return sectionKey
     }
     
     func fetchContacts() {
         cancelOutstandingRequests()
-        /*
         let request = CSHomeRequest.getContacts
         let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {
-                self?.contacts = response?.result?.assets
-                self?.output?.contacts(self?.contacts, error: error as? CSError)
+                self?.parseContactsForSections(contacts: response?.result?.contacts)
+                self?.output?.contactsFetched(error: error as? CSError)
             } else {
                 //TODO: handle error cases
-                self?.output?.contacts(nil, error: CSError.unknown)
+                self?.output?.contactsFetched(error: CSError.unknown)
             }
             self?.managers.remove(apiManager)
         }
- */
-        // Reading from local json file
-        
-        fetchData { (contacts, error) in
-            if nil == error, let contacts = contacts {
-                self.contacts = contacts
-                self.output?.contacts(contacts, error: nil)
-            } else {
-                self.output?.contacts(nil, error: CSError.contactFetchingError)
-            }
-        }
     }
     
+    /*
+    // Reading from local json file
     private func fetchData(completion: CSContactListResponse?) {
         
         if let path = Bundle.main.path(forResource: "Contacts", ofType: "json") {
@@ -103,6 +111,7 @@ extension CSHomePresenter: CSHomePresenterInput {
         }
         
     }
+    */
     
     private func cancelOutstandingRequests() {
         if managers.count > 0 {
@@ -116,7 +125,33 @@ extension CSHomePresenter: CSHomePresenterInput {
 }
 
 extension CSHomePresenter {
-    func parseContactsForSections() {
-        
+    func parseContactsForSections(contacts: [CSContact]?) {
+//        var firstNameContactList = sortedContacts.map( { $0.first })
+        var mappingList = [String: [CSContact]]()
+        let validRegExp = "[a-zA-Z]"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", validRegExp)
+        if let sortedContacts = contacts?.sorted(by: { $0.name <= $1.name }), sortedContacts.count > 0 {
+            var lastParsingCharacter = sortedContacts[0].name.first
+            if false == predicate.evaluate(with: String(lastParsingCharacter!)) {
+                lastParsingCharacter = "#"
+            }
+            var parsingCharacterRelatedContacts = [CSContact]()
+            for contact in sortedContacts {
+                var currentParsingCharacter = contact.name.first
+                if false == predicate.evaluate(with: String(currentParsingCharacter!)) {
+                    currentParsingCharacter = "#"
+                }
+                if currentParsingCharacter != lastParsingCharacter {
+                    mappingList[String(lastParsingCharacter!)] = parsingCharacterRelatedContacts
+                    parsingCharacterRelatedContacts = [CSContact]()
+                }
+                parsingCharacterRelatedContacts.append(contact)
+                lastParsingCharacter = currentParsingCharacter
+            }
+            if parsingCharacterRelatedContacts.count > 0 {
+                mappingList[String(lastParsingCharacter!)] = parsingCharacterRelatedContacts
+            }
+        }
+        self.contactsMappingList = mappingList
     }
 }

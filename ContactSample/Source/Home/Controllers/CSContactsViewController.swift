@@ -21,10 +21,20 @@ class CSContactsViewController: UIViewController {
     }
     
     private func initialSetup() {
+        registerNotifications()
         homePresenter = CSHomePresenter(delegate: self)
-        homePresenter.fetchContacts()
-        self.activityIndicatorView.startAnimating()
+        reloadContent()
         setupNavigationBar()
+    }
+    
+    private func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadContent), name: NSNotification.Name.ContentDidUpdate, object: nil)
+    }
+    
+    @objc private func reloadContent() {
+        homePresenter.fetchContacts()
+        self.tableView.isHidden = true
+        self.activityIndicatorView.startAnimating()
     }
     
     private func setupNavigationBar() {
@@ -47,34 +57,37 @@ class CSContactsViewController: UIViewController {
 extension CSContactsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return homePresenter.numberOfContactsSection()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return homePresenter.numberOfContacts(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CSContactTableViewCell.className, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CSContactTableViewCell.className, for: indexPath) as! CSContactTableViewCell
+        cell.contact = homePresenter.contact(at: indexPath.section, row: indexPath.row)
         return cell
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["A", "B"]
+        return homePresenter.sectionTitles()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "A"
+        return homePresenter.sectionTitle(at: section)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contactDetailVC = CSContactDetailViewController.contactDetailVC()
+        contactDetailVC.contact = homePresenter.contact(at: indexPath.section, row: indexPath.row)
         self.navigationController?.pushViewController(contactDetailVC, animated: true)
     }
 }
 
 extension CSContactsViewController: CSHomePresenterOutput {
-    func contacts(_ contacts: [CSContact]?, error: CSError?) {
+    func contactsFetched(error: CSError?) {
+        self.tableView.isHidden = false
         self.activityIndicatorView.stopAnimating()
         self.tableView.reloadData()
     }

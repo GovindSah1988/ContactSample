@@ -16,8 +16,11 @@ class CSContactTableViewCell: UITableViewCell {
 
     var contact: CSContact! {
         didSet {
-            contactIV.loadImage(fromURL: contact.profilePic)
+            if let profileUrl = contact.profilePic {
+                contactIV.loadImage(fromURL: profileUrl)
+            }
             nameLB.text = contact.name
+            favouriteIV.isHidden = !(contact.favorite ?? false)
         }
     }
     
@@ -29,7 +32,6 @@ class CSContactTableViewCell: UITableViewCell {
         super.layoutSubviews()
         self.contactIV.layer.cornerRadius = CSContactTableViewCell.CSConstantsValues.contactIVCornerRadius
         self.contactIV.clipsToBounds = true
-        favouriteIV.isHidden = false
     }
     
     override func prepareForReuse() {

@@ -19,6 +19,7 @@ protocol CSEndpoint {
     var method: String? { get } // HTTP Method (e.g. GET, POST etc)
     var headers: HeaderParams? { get } // Header parameters
     var parameters: APIParams? { get } // Request Body/ Query Params
+    var httpBody: Data? { get } // Request Body
 }
 
 extension CSEndpoint {
@@ -27,4 +28,5 @@ extension CSEndpoint {
     internal var method: String? { return CSRequestMethod.get.rawValue }
     internal var headers: HeaderParams? { return [:] }
     internal var parameters: APIParams? { return nil }
+    internal var httpBody: Data? { return nil } // Request Body
 }

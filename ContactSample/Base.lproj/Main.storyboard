@@ -87,6 +87,7 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ytp-tV-yEk">
                                 <rect key="frame" x="189" y="430" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.89803921568627454" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -151,36 +152,48 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="2Sj-qJ-e2E">
-                                        <rect key="frame" x="121" y="270" width="172" height="68"/>
+                                        <rect key="frame" x="64" y="270" width="286" height="68"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVM-4j-Vnb">
-                                                <rect key="frame" x="0.0" y="0.0" width="16" height="68"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="message_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="messageTapped:" destination="qyG-KO-JLE" eventType="touchUpInside" id="L6a-aG-eVv"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhM-Xp-jsa">
-                                                <rect key="frame" x="52" y="0.0" width="16" height="68"/>
+                                                <rect key="frame" x="80" y="0.0" width="45" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="call_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="callTapped:" destination="qyG-KO-JLE" eventType="touchUpInside" id="hHO-Vz-MN2"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zby-Sj-zsc">
-                                                <rect key="frame" x="104" y="0.0" width="16" height="68"/>
+                                                <rect key="frame" x="161" y="0.0" width="45" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="email_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="emailTapped:" destination="qyG-KO-JLE" eventType="touchUpInside" id="0VN-kF-Vle"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg3-Y2-V2V">
-                                                <rect key="frame" x="156" y="0.0" width="16" height="68"/>
+                                                <rect key="frame" x="242" y="0.0" width="44" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="favourite_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <state key="selected" image="favourite_button_selected"/>
+                                                <connections>
+                                                    <action selector="favouriteTapped:" destination="qyG-KO-JLE" eventType="touchUpInside" id="qbM-4b-O6o"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -228,6 +241,11 @@
                                     <action selector="deleteContact:" destination="qyG-KO-JLE" eventType="touchUpInside" id="bcu-hs-8tj"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="L2u-Q8-etg">
+                                <rect key="frame" x="189" y="430" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.8980392157" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -245,11 +263,13 @@
                         <viewLayoutGuide key="safeArea" id="S07-AV-5kf"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="L2u-Q8-etg" id="bTi-aB-nR6"/>
                         <outlet property="callBT" destination="yhM-Xp-jsa" id="CtN-90-sXe"/>
                         <outlet property="emailBT" destination="Zby-Sj-zsc" id="kuX-IV-sG8"/>
                         <outlet property="favouriteBT" destination="Bg3-Y2-V2V" id="2hH-U6-p4A"/>
                         <outlet property="gradientView" destination="vhu-rV-zFu" id="KPo-d7-Nc5"/>
                         <outlet property="messageBT" destination="aVM-4j-Vnb" id="S76-2Q-7hc"/>
+                        <outlet property="nameLB" destination="Lmw-Ih-PRL" id="A2q-d3-jiS"/>
                         <outlet property="profileIV" destination="psY-Xc-tDu" id="PSk-Xb-Ip7"/>
                         <outlet property="tableView" destination="UQx-IA-Jqy" id="tYT-0V-BCM"/>
                         <outlet property="tableViewHeightALC" destination="i51-oZ-GB2" id="ymJ-Jb-XKf"/>
@@ -281,7 +301,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBL-2F-58v">
-                                                <rect key="frame" x="266" y="159" width="16" height="22"/>
+                                                <rect key="frame" x="241" y="140" width="41" height="41"/>
                                                 <state key="normal" image="camera_button"/>
                                                 <connections>
                                                     <action selector="uploadProfilePic:" destination="fWm-vI-DcQ" eventType="touchUpInside" id="zG8-dM-cd0"/>
@@ -310,6 +330,11 @@
                                             <outlet property="delegate" destination="fWm-vI-DcQ" id="RBa-LT-JLT"/>
                                         </connections>
                                     </tableView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HfE-IL-rlZ">
+                                        <rect key="frame" x="189" y="430" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="color" red="0.0" green="0.8980392157" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -333,6 +358,7 @@
                         <viewLayoutGuide key="safeArea" id="8od-EX-Q4l"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="HfE-IL-rlZ" id="87M-4j-238"/>
                         <outlet property="gradientView" destination="FG4-9C-t0D" id="G1c-4J-OUx"/>
                         <outlet property="profileIV" destination="pni-gQ-44d" id="hfM-PQ-cd3"/>
                         <outlet property="tableView" destination="cs7-XL-OHL" id="MwI-oM-FZ1"/>

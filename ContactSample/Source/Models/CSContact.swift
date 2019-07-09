@@ -16,36 +16,59 @@ struct CSContact: Codable {
         case lastName = "last_name"
         case profilePic = "profile_pic"
         case favorite = "favorite"
+        case email = "email"
+        case phoneNumber = "phone_number"
+        case detailUrl = "url"
     }
     
     let id: Int?
-    let firstName: String
-    let lastName: String
-    let profilePic: String
-    let favorite: Bool
-    
+    var firstName: String
+    var lastName: String
+    var profilePic: String?
+    var favorite: Bool?
+    var email: String?
+    var phoneNumber: String?
+    var detailUrl: String?
+
     var name: String {
-        return firstName.capitalized + " " + lastName.capitalized
+        return firstName.appendNextWord(lastName).capitalized
+    }
+    
+    init(id: Int?) {
+        self.id = id
+        self.firstName = ""
+        self.lastName = ""
+        self.profilePic = nil
+        self.favorite = false
+        self.email = nil
+        self.phoneNumber = nil
+        self.detailUrl = nil
     }
     
     // MARK: - Decodable
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
+        id = try container.decodeIfPresent(Int.self, forKey: .id)
         firstName = try container.decode(String.self, forKey: .firstName)
         lastName = try container.decode(String.self, forKey: .lastName)
-        profilePic = try container.decode(String.self, forKey: .profilePic)
-        favorite = try container.decode(Bool.self, forKey: .favorite)
+        profilePic = try container.decodeIfPresent(String.self, forKey: .profilePic)
+        favorite = try container.decodeIfPresent(Bool.self, forKey: .favorite)
+        email = try container.decodeIfPresent(String.self, forKey: .email)
+        phoneNumber = try container.decodeIfPresent(String.self, forKey: .phoneNumber)
+        detailUrl = try container.decodeIfPresent(String.self, forKey: .detailUrl)
     }
     
     // MARK: - Encodable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(firstName, forKey: .firstName)
-        try container.encode(lastName, forKey: .lastName)
-        try container.encode(profilePic, forKey: .profilePic)
-        try container.encode(favorite, forKey: .favorite)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(profilePic, forKey: .profilePic)
+        try container.encodeIfPresent(favorite, forKey: .favorite)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(phoneNumber, forKey: .phoneNumber)
+        try container.encodeIfPresent(detailUrl, forKey: .detailUrl)
     }
     
 }

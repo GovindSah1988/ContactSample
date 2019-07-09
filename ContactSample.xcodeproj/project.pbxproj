@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2192F4D22D32E07005D2756 /* CSContactDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2192F4C22D32E07005D2756 /* CSContactDetailPresenter.swift */; };
+		C2192F5022D33036005D2756 /* CSContactDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2192F4F22D33036005D2756 /* CSContactDetailResponse.swift */; };
+		C2192F5222D359CB005D2756 /* CSAddEditContactPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2192F5122D359CB005D2756 /* CSAddEditContactPresenter.swift */; };
 		C219BAC422D1AE410010A87C /* CSContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C219BAC322D1AE410010A87C /* CSContactDetailViewController.swift */; };
 		C219BAC822D1AF340010A87C /* CSAddEditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C219BAC722D1AF340010A87C /* CSAddEditContactViewController.swift */; };
 		C21A424222D246DC005F5A4E /* CSDetailFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A424022D246DC005F5A4E /* CSDetailFieldTableViewCell.swift */; };
@@ -58,6 +61,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2192F4C22D32E07005D2756 /* CSContactDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactDetailPresenter.swift; sourceTree = "<group>"; };
+		C2192F4F22D33036005D2756 /* CSContactDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactDetailResponse.swift; sourceTree = "<group>"; };
+		C2192F5122D359CB005D2756 /* CSAddEditContactPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAddEditContactPresenter.swift; sourceTree = "<group>"; };
 		C219BAC322D1AE410010A87C /* CSContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContactDetailViewController.swift; sourceTree = "<group>"; };
 		C219BAC722D1AF340010A87C /* CSAddEditContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAddEditContactViewController.swift; sourceTree = "<group>"; };
 		C21A424022D246DC005F5A4E /* CSDetailFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSDetailFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,9 +128,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2192F4B22D32DD3005D2756 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				C2192F4C22D32E07005D2756 /* CSContactDetailPresenter.swift */,
+				C2192F5122D359CB005D2756 /* CSAddEditContactPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		C2192F4E22D33014005D2756 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C2192F4F22D33036005D2756 /* CSContactDetailResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		C219BAC222D1AD070010A87C /* ContactDetail */ = {
 			isa = PBXGroup;
 			children = (
+				C2192F4E22D33014005D2756 /* Responses */,
+				C2192F4B22D32DD3005D2756 /* Presenters */,
 				C21A423F22D2466B005F5A4E /* Views */,
 				C219BAC522D1AE940010A87C /* Controllers */,
 			);
@@ -494,6 +519,7 @@
 				C2FEE4E422D12F9700518CF4 /* CSResponse.swift in Sources */,
 				C2FEE4F322D1499F00518CF4 /* CSAppearanceManager.swift in Sources */,
 				C2FEE4EE22D134DC00518CF4 /* CSContact.swift in Sources */,
+				C2192F4D22D32E07005D2756 /* CSContactDetailPresenter.swift in Sources */,
 				C2FEE4EC22D1339E00518CF4 /* CSHomePresenter.swift in Sources */,
 				C2FEE4DE22D12F6400518CF4 /* CSAPIManager.swift in Sources */,
 				C2FEE4D022D12DE700518CF4 /* CSNetworkConstants.swift in Sources */,
@@ -508,8 +534,10 @@
 				C2FEE4D622D12F1700518CF4 /* CSAgentProtocol.swift in Sources */,
 				C2FEE4E022D12F7600518CF4 /* CSEndPoint.swift in Sources */,
 				C2FEE4EA22D1334700518CF4 /* CSHomeRequest.swift in Sources */,
+				C2192F5022D33036005D2756 /* CSContactDetailResponse.swift in Sources */,
 				C2FEE49122D127C500518CF4 /* CSAppDelegate.swift in Sources */,
 				C2FEE4D822D12F2C00518CF4 /* CSBaseAgent.swift in Sources */,
+				C2192F5222D359CB005D2756 /* CSAddEditContactPresenter.swift in Sources */,
 				C2FEE4D422D12E1300518CF4 /* CSExtensions.swift in Sources */,
 				C2FEE4E822D130C100518CF4 /* CSContactTableViewCell.swift in Sources */,
 				C2FEE4E622D12FA500518CF4 /* CSResponseBaseModel.swift in Sources */,

@@ -32,6 +32,7 @@ extension CSRequestable {
         guard let resourceURL = urlComponents.url else { throw CSError.urlMalformed }
         let request = NSMutableURLRequest(url: resourceURL)
         request.httpMethod = method!
+        request.httpBody = httpBody
         request.allHTTPHeaderFields = headers
         return request as URLRequest
     }

@@ -15,9 +15,9 @@ enum AppEnvironment {
     var baseUrl: String {
         switch self {
         case .production:
-            return "https://gist.githubusercontent.com/mohammadZ74/"
+            return "http://gojek-contacts-app.herokuapp.com/"
         case .staging:
-            return "https://gist.githubusercontent.com/mohammadZ74/"
+            return "http://gojek-contacts-app.herokuapp.com/"
         }
     }
     
@@ -30,7 +30,7 @@ struct CSNetworkConstants {
     struct APIEndpoints {
         static let baseurl = environment.baseUrl
         
-        static let allAlbums = baseurl + "dcd86ebedb5e519fd7b09b79dd4e4558/raw/b7505a54339f965413f5d9feb05b67fb7d0e464e/MvvmExampleApi.json"
+        static let allContacts = baseurl + "contacts"
     }
     
 }
