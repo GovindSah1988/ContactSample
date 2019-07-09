@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIStoryboard {
+public extension UIStoryboard {
     /// returns main story board
     class func mainStoryboard() -> UIStoryboard {
         return UIStoryboard(name: CSConstants.CSStoryboardConstants.main, bundle: nil)

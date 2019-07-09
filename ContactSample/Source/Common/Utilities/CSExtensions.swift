@@ -50,7 +50,7 @@ public extension UIImageView {
 
 // MARK: - NSObject Extension
 
-extension NSObject {
+public extension NSObject {
     
     /// Returns class name string
     var className: String {
@@ -64,10 +64,10 @@ extension NSObject {
 
 // MARK: - UIColor Extension
 
-extension UIColor {
+public extension UIColor {
     
     /// Returns class name string
-    class var greenColor: UIColor {
+    class var appGreenColor: UIColor {
         return UIColor(red: 0.0, green: 229.0/255.0, blue: 195.0/255.0, alpha: 1.0)
     }
     
@@ -86,7 +86,7 @@ extension UIColor {
 
 // MARK: - UINavigationController Extension
 
-extension UINavigationController {
+public extension UINavigationController {
     
     func pushFromBottomToTop(_ viewController: UIViewController) {
         let transition: CATransition = CATransition()
@@ -127,7 +127,7 @@ public extension UIButton {
 
 // MARK: - String Extension
 
-extension String {
+public extension String {
     
     func isValidEmail() -> Bool {
         let emailRegExpression = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@+[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
@@ -137,7 +137,7 @@ extension String {
     
     // phoneNum must be more atleast 10 digit
     func isValidPhoneNumber() -> Bool {
-        let phoneNumRegExpression = "^[0-9+]{10,}$"
+        let phoneNumRegExpression = "^[+]*[0-9]{10,}$"
         let phoneNumTest = NSPredicate(format: "SELF MATCHES %@", phoneNumRegExpression)
         return phoneNumTest.evaluate(with: self)
     }
@@ -146,9 +146,7 @@ extension String {
      to remove spaces and hyphen from the phone string
      */
     func removeSpaceAndSpecialCharacter() -> String {
-        var string = self.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "").removingPercentEncoding!
-        string = string.hasSuffix("") ? String(string.dropLast()) : string
-        string = string.hasPrefix("") ? String(string.dropFirst()) : string
+        let string = self.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "").removingPercentEncoding!
         return string
     }
 

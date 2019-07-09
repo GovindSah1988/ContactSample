@@ -101,8 +101,12 @@ extension CSContactsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CSContactsViewController: CSHomePresenterOutput {
     func contactsFetched(error: CSError?) {
-        self.tableView.isHidden = false
-        self.activityIndicatorView.stopAnimating()
-        self.tableView.reloadData()
+        if nil == error {
+            self.tableView.isHidden = false
+            self.activityIndicatorView.stopAnimating()
+            self.tableView.reloadData()
+        } else {
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.commonErrorInfo)
+        }
     }
 }

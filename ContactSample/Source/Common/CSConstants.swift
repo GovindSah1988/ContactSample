@@ -52,11 +52,6 @@ struct CSConstants {
         static let accept = "Accept"
         static let contentTypeJson = "application/json"
         static let acceptJson = "application/json"
-        static let multipartContentType = "multipart/form-data"
-    }
-
-    struct ParameterConstants {
-        static let image = "image"
     }
 }
 

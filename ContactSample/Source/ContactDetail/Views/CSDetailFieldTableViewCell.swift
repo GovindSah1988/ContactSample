@@ -12,7 +12,7 @@ protocol CSEditTextFieldDelegate: NSObject {
     func textEdited(finalText: String?, type: CSContactDetailRow)
 }
 
-class CSDetailFieldTableViewCell: UITableViewCell {
+public class CSDetailFieldTableViewCell: UITableViewCell {
 
     var type: CSContactDetailRow!
     
@@ -22,18 +22,18 @@ class CSDetailFieldTableViewCell: UITableViewCell {
     
     weak var editFieldDelegate: CSEditTextFieldDelegate?
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         entryTF.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         self.titleWidthALC.constant = CGFloat(CSConstants.CSWidthConstraint.titleMaxWidth)
     }
     
-    override func prepareForReuse() {
+    override public func prepareForReuse() {
         super.prepareForReuse()
         self.entryTF.isEnabled = true
         self.titleLB.text = ""

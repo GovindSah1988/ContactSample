@@ -11,7 +11,7 @@ import UIKit
 struct CSAppearanceManager {
     
     static func setupAppearance() {
-        UIBarButtonItem.appearance().tintColor = UIColor.greenColor
+        UIBarButtonItem.appearance().tintColor = UIColor.appGreenColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleColor]
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)

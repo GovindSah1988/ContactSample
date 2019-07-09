@@ -16,7 +16,7 @@ protocol CSAddEditContactPresenterOutput: class {
  Protocol that defines the Presenter's use case.
  */
 protocol CSAddEditContactPresenterInput: class {
-    func addEdit(contact: CSContact, editMode: CSContactEditMode)
+    func addEdit(contact: CSContact, editMode: CSContactEditMode, apiManager: CSAPIManager)
 }
 
 class CSAddEditContactPresenter: NSObject {
@@ -34,18 +34,17 @@ class CSAddEditContactPresenter: NSObject {
 }
 
 extension CSAddEditContactPresenter: CSAddEditContactPresenterInput {
-    func addEdit(contact: CSContact, editMode: CSContactEditMode) {
+    func addEdit(contact: CSContact, editMode: CSContactEditMode, apiManager: CSAPIManager = CSAPIManager()) {
         cancelOutstandingRequests()
         if .add == editMode {
-            addNewContact(contact: contact)
+            addNewContact(contact: contact, apiManager: apiManager)
         } else {
-            editContact(contact: contact)
+            editContact(contact: contact, apiManager: apiManager)
         }
     }
     
-    private func addNewContact(contact: CSContact) {
+    private func addNewContact(contact: CSContact, apiManager: CSAPIManager) {
         let request = CSHomeRequest.addContact(contact: contact)
-        let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {
@@ -58,9 +57,8 @@ extension CSAddEditContactPresenter: CSAddEditContactPresenterInput {
         }
     }
     
-    private func editContact(contact: CSContact) {
+    private func editContact(contact: CSContact, apiManager: CSAPIManager) {
         let request = CSHomeRequest.saveContact(contact: contact)
-        let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {

@@ -53,7 +53,7 @@ extension CSNetworkAgent: CSAgentProtocol {
                 self.requestTask?.resume()
             }
         } catch {
-            
+            completion(nil, error as! CSError)
         }
         
     }

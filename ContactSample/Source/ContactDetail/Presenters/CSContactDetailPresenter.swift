@@ -18,9 +18,9 @@ protocol CSContactDetailPresenterOutput: class {
  Protocol that defines the Presenter's use case.
  */
 protocol CSContactDetailPresenterInput: class {
-    func fetchContactDetail(contact: CSContact)
-    func deleteContact(contact: CSContact)
-    func saveContact(contact: CSContact)
+    func fetchContactDetail(contact: CSContact, apiManager: CSAPIManager)
+    func deleteContact(contact: CSContact, apiManager: CSAPIManager)
+    func saveContact(contact: CSContact, apiManager: CSAPIManager)
 }
 
 class CSContactDetailPresenter: NSObject {
@@ -39,10 +39,9 @@ class CSContactDetailPresenter: NSObject {
 }
 
 extension CSContactDetailPresenter: CSContactDetailPresenterInput {
-    func deleteContact(contact: CSContact) {
+    func deleteContact(contact: CSContact, apiManager: CSAPIManager = CSAPIManager()) {
         cancelOutstandingRequests()
         let request = CSHomeRequest.deleteContact(contact: contact)
-        let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {
@@ -55,9 +54,8 @@ extension CSContactDetailPresenter: CSContactDetailPresenterInput {
         }
     }
     
-    func saveContact(contact: CSContact) {
+    func saveContact(contact: CSContact, apiManager: CSAPIManager = CSAPIManager()) {
         let request = CSHomeRequest.saveContact(contact: contact)
-        let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {
@@ -70,10 +68,9 @@ extension CSContactDetailPresenter: CSContactDetailPresenterInput {
         }
     }
 
-    func fetchContactDetail(contact: CSContact) {
+    func fetchContactDetail(contact: CSContact, apiManager: CSAPIManager = CSAPIManager()) {
         cancelOutstandingRequests()
         let request = CSHomeRequest.getContactDetail(contact: contact)
-        let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {

@@ -18,12 +18,12 @@ protocol CSHomePresenterOutput: class {
  Protocol that defines the Presenter's use case.
  */
 protocol CSHomePresenterInput: class {
-    func fetchContacts()
+    func fetchContacts(apiManager: CSAPIManager)
     func numberOfContactsSection() -> Int
     func numberOfContacts(for section: Int) -> Int
     func contact(at section: Int, row: Int) -> CSContact?
     func sectionTitles() -> [String]?
-    func sectionTitle(at section: Int) -> String
+    func sectionTitle(at section: Int) -> String?
 }
 
 class CSHomePresenter: NSObject {
@@ -42,10 +42,13 @@ class CSHomePresenter: NSObject {
     }
     
     private func contactsForSection(for section: Int) -> [CSContact] {
-        var contactListForSection:[CSContact]? = [CSContact]()
+        var contactListForSection = [CSContact]()
+        guard contactsMappingList.keys.sorted().count > section else {
+            return contactListForSection
+        }
         let sectionKey = contactsMappingList.keys.sorted()[section]
-        contactListForSection = contactsMappingList[sectionKey]
-        return contactListForSection ?? [CSContact]()
+        contactListForSection = contactsMappingList[sectionKey]!
+        return contactListForSection
     }
 }
 
@@ -71,15 +74,18 @@ extension CSHomePresenter: CSHomePresenterInput {
         return contactsMappingList.keys.sorted()
     }
     
-    func sectionTitle(at section: Int) -> String {
-        let sectionKey = contactsMappingList.keys.sorted()[section]
+    func sectionTitle(at section: Int) -> String? {
+        let sortedKeys = contactsMappingList.keys.sorted()
+        guard sortedKeys.count > section else {
+            return nil
+        }
+        let sectionKey = sortedKeys[section]
         return sectionKey
     }
     
-    func fetchContacts() {
+    func fetchContacts(apiManager: CSAPIManager = CSAPIManager()) {
         cancelOutstandingRequests()
         let request = CSHomeRequest.getContacts
-        let apiManager = CSAPIManager()
         managers.add(apiManager)
         apiManager.executeRequest(request: request, responseType: CSContactResponse.self) { [weak self] (response, error) in
             if nil == error, nil != response {
@@ -126,7 +132,6 @@ extension CSHomePresenter: CSHomePresenterInput {
 
 extension CSHomePresenter {
     func parseContactsForSections(contacts: [CSContact]?) {
-//        var firstNameContactList = sortedContacts.map( { $0.first })
         var mappingList = [String: [CSContact]]()
         let validRegExp = "[a-zA-Z]"
         let predicate = NSPredicate(format: "SELF MATCHES %@", validRegExp)
