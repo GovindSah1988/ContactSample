@@ -13,6 +13,8 @@ struct CSAppearanceManager {
     static func setupAppearance() {
         UIBarButtonItem.appearance().tintColor = UIColor.greenColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleColor]
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
     }
     
 }

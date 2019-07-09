@@ -35,7 +35,7 @@ class CSContactTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        contactIV.image = UIImage()
+        contactIV.image = #imageLiteral(resourceName: "placeholder_photo")
         nameLB.text = ""
         favouriteIV.isHidden = true
     }
