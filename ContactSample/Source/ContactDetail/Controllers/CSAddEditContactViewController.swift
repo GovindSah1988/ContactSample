@@ -107,9 +107,7 @@ class CSAddEditContactViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelContactTapped))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneContactTapped))
-        if editMode == .add {
-            self.navigationItem.rightBarButtonItem?.isEnabled = false
-        }
+        self.navigationItem.rightBarButtonItem?.isEnabled = canCreateContact()
     }
     
     @objc func cancelContactTapped(_ button: UIBarButtonItem) {
