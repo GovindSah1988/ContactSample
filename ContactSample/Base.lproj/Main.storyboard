@@ -116,7 +116,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="niC-tE-lLL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="01o-Xz-foD">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -152,10 +151,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="2Sj-qJ-e2E">
-                                        <rect key="frame" x="64" y="270" width="286" height="68"/>
+                                        <rect key="frame" x="121" y="270" width="172" height="68"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVM-4j-Vnb">
-                                                <rect key="frame" x="0.0" y="0.0" width="44" height="68"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="16" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="message_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -165,7 +164,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhM-Xp-jsa">
-                                                <rect key="frame" x="80" y="0.0" width="45" height="68"/>
+                                                <rect key="frame" x="52" y="0.0" width="16" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="call_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -175,7 +174,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zby-Sj-zsc">
-                                                <rect key="frame" x="161" y="0.0" width="45" height="68"/>
+                                                <rect key="frame" x="104" y="0.0" width="16" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="email_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -185,7 +184,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg3-Y2-V2V">
-                                                <rect key="frame" x="242" y="0.0" width="44" height="68"/>
+                                                <rect key="frame" x="156" y="0.0" width="16" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" image="favourite_button">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -300,7 +299,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBL-2F-58v">
-                                                <rect key="frame" x="241" y="140" width="41" height="41"/>
+                                                <rect key="frame" x="266" y="159" width="16" height="22"/>
                                                 <state key="normal" image="camera_button"/>
                                                 <connections>
                                                     <action selector="uploadProfilePic:" destination="fWm-vI-DcQ" eventType="touchUpInside" id="zG8-dM-cd0"/>
