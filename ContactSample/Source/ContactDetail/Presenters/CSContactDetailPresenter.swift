@@ -10,6 +10,8 @@ import Foundation
 
 protocol CSContactDetailPresenterOutput: class {
     func detailFetched(contact: CSContact?, error: CSError?)
+    func deletedContact(contact: CSContact?, error: CSError?)
+    func detailsUpdated(contact: CSContact?, error: CSError?)
 }
 
 /**
@@ -17,6 +19,8 @@ protocol CSContactDetailPresenterOutput: class {
  */
 protocol CSContactDetailPresenterInput: class {
     func fetchContactDetail(contact: CSContact)
+    func deleteContact(contact: CSContact)
+    func saveContact(contact: CSContact)
 }
 
 class CSContactDetailPresenter: NSObject {
@@ -35,21 +39,50 @@ class CSContactDetailPresenter: NSObject {
 }
 
 extension CSContactDetailPresenter: CSContactDetailPresenterInput {
+    func deleteContact(contact: CSContact) {
+        cancelOutstandingRequests()
+        let request = CSHomeRequest.deleteContact(contact: contact)
+        let apiManager = CSAPIManager()
+        managers.add(apiManager)
+        apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
+            if nil == error, nil != response {
+                self?.output?.deletedContact(contact: contact, error: nil)
+            } else {
+                //TODO: handle error cases
+                self?.output?.deletedContact(contact: nil, error: CSError.unknown)
+            }
+            self?.managers.remove(apiManager)
+        }
+    }
+    
+    func saveContact(contact: CSContact) {
+        let request = CSHomeRequest.saveContact(contact: contact)
+        let apiManager = CSAPIManager()
+        managers.add(apiManager)
+        apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
+            if nil == error, nil != response {
+                self?.output?.detailsUpdated(contact: response!.result?.contact, error: nil)
+            } else {
+                //TODO: handle error cases
+                self?.output?.detailsUpdated(contact: nil, error: CSError.unknown)
+            }
+            self?.managers.remove(apiManager)
+        }
+    }
+
     func fetchContactDetail(contact: CSContact) {
         cancelOutstandingRequests()
-        if let detailUrl = contact.detailUrl {
-            let request = CSHomeRequest.getContactDetail(url: detailUrl)
-            let apiManager = CSAPIManager()
-            managers.add(apiManager)
-            apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
-                if nil == error, nil != response {
-                    self?.output?.detailFetched(contact: response!.result?.contact, error: nil)
-                } else {
-                    //TODO: handle error cases
-                    self?.output?.detailFetched(contact: nil, error: CSError.unknown)
-                }
-                self?.managers.remove(apiManager)
+        let request = CSHomeRequest.getContactDetail(contact: contact)
+        let apiManager = CSAPIManager()
+        managers.add(apiManager)
+        apiManager.executeRequest(request: request, responseType: CSContactDetailResponse.self) { [weak self] (response, error) in
+            if nil == error, nil != response {
+                self?.output?.detailFetched(contact: response!.result?.contact, error: nil)
+            } else {
+                //TODO: handle error cases
+                self?.output?.detailFetched(contact: nil, error: CSError.unknown)
             }
+            self?.managers.remove(apiManager)
         }
     }
     

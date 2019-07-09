@@ -108,6 +108,8 @@ class CSAddEditContactViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelContactTapped))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneContactTapped))
         self.navigationItem.rightBarButtonItem?.isEnabled = canCreateContact()
+        self.navigationController?.navigationBar.barTintColor = UIColor.gradientTopColor
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     @objc func cancelContactTapped(_ button: UIBarButtonItem) {
@@ -116,6 +118,22 @@ class CSAddEditContactViewController: UIViewController {
     
     @objc func doneContactTapped(_ button: UIBarButtonItem) {
         if let contact = contact {
+            if contact.firstName.count < 2 {
+                presentOkAlert(title: CSConstants.CSLocalizedStringConstants.alertInvalidFirstNameTitle, message: CSConstants.CSLocalizedStringConstants.alertInvalidFirstNameMessage)
+                return
+            }
+            if contact.lastName.count < 2 {
+                presentOkAlert(title: CSConstants.CSLocalizedStringConstants.alertInvalidLastNameTitle, message: CSConstants.CSLocalizedStringConstants.alertInvalidLastNameMessage)
+                return
+            }
+            if false == contact.phoneNumber?.isValidPhoneNumber() {
+                presentOkAlert(title: CSConstants.CSLocalizedStringConstants.alertInvalidPhoneNumTitle, message: CSConstants.CSLocalizedStringConstants.alertInvalidPhoneNumMessage)
+                return
+            }
+            if false == contact.email?.isValidEmail() {
+                presentOkAlert(title: CSConstants.CSLocalizedStringConstants.alertInvalidEmailTitle, message: CSConstants.CSLocalizedStringConstants.alertInvalidEmailMessage)
+                return
+            }
             self.activityIndicator.startAnimating()
             addEditPresenter = CSAddEditContactPresenter(delegate: self)
             addEditPresenter?.addEdit(contact: contact, editMode: editMode)
@@ -123,6 +141,13 @@ class CSAddEditContactViewController: UIViewController {
     }
     
     @IBAction func uploadProfilePic(_ sender: Any) {
+        let imagePickerVC = UIImagePickerController()
+        imagePickerVC.sourceType = .photoLibrary
+        imagePickerVC.allowsEditing = true
+        imagePickerVC.delegate = self
+        self.present(imagePickerVC, animated: true) { [weak self] in
+            self?.navigationController?.navigationBar.isTranslucent = true
+        }
     }
     
     // add logic to test the validity of each text field
@@ -162,15 +187,33 @@ extension CSAddEditContactViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
+extension CSAddEditContactViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+
+        picker.dismiss(animated: true)
+        
+        guard let image = info[.editedImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+        
+        self.contact?.imageData = UIImage.pngData(image)()
+        self.profileIV.image = image
+    }
+}
+
 extension CSAddEditContactViewController: CSAddEditContactPresenterOutput {
     func didFinishAddEdit(contact: CSContact?, error: CSError?) {
         self.activityIndicator.stopAnimating()
         // dismiss controller
         if nil ==  error, let contact = contact {
             NotificationCenter.default.post(name: Notification.Name.ContentDidUpdate, object: nil)
-            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.editAddSuccessMessage) { [weak self] (_) in
-                self?.editDelegate?.contactEdited(contact: contact)
-                self?.navigationController?.popFromTopToBottom()
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.editAddSuccessMessage) { [unowned self] (_) in
+                self.editDelegate?.contactEdited(contact: contact)
+                self.navigationController?.popFromTopToBottom()
             }
         } else {
             self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.commonErrorInfo)

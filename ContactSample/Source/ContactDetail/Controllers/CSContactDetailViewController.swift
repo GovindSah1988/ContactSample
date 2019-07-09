@@ -128,6 +128,8 @@ class CSContactDetailViewController: UIViewController {
     
     private func setupNavigationBar() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editContactTapped))
+        self.navigationController?.navigationBar.barTintColor = UIColor.gradientTopColor
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     @objc func editContactTapped(_ button: UIBarButtonItem) {
@@ -139,6 +141,11 @@ class CSContactDetailViewController: UIViewController {
 
     @IBAction func deleteContact(_ sender: Any) {
         print("Delete Contact")
+        self.presentOkWithCancelAlert(title: CSConstants.CSLocalizedStringConstants.alertDeleteTitle, message: CSConstants.CSLocalizedStringConstants.alertDeleteMessage) { [unowned self] (_) in
+            self.activityIndicator.startAnimating()
+            self.navigationController?.navigationBar.isUserInteractionEnabled = false
+            self.detailPresenter.deleteContact(contact: self.contact)
+        }
     }
     
     @IBAction func messageTapped(_ sender: UIButton) {
@@ -169,6 +176,9 @@ class CSContactDetailViewController: UIViewController {
         sender.isSelected = !sender.isSelected
         // Make proper API call
         print("favouriteTapped")
+        contact.favorite = sender.isSelected
+        self.activityIndicator.startAnimating()
+        self.detailPresenter.saveContact(contact: contact)
     }
 
 }
@@ -202,12 +212,39 @@ extension CSContactDetailViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 extension CSContactDetailViewController: CSContactDetailPresenterOutput {
+    func deletedContact(contact: CSContact?, error: CSError?) {
+        self.activityIndicator.stopAnimating()
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        if nil ==  error {
+            NotificationCenter.default.post(name: Notification.Name.ContentDidUpdate, object: nil)
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.deleteSuccessMessage) { [unowned self] (_) in
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.commonErrorInfo)
+        }
+    }
+    
     func detailFetched(contact: CSContact?, error: CSError?) {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         self.activityIndicator.stopAnimating()
         if let aContact = contact {
             self.contact = aContact
             self.tableView.reloadData()
+        } else {
+            // Show Error
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.commonErrorInfo)
+        }
+    }
+    
+    func detailsUpdated(contact: CSContact?, error: CSError?) {
+        self.activityIndicator.stopAnimating()
+        if let aContact = contact {
+            NotificationCenter.default.post(name: Notification.Name.ContentDidUpdate, object: nil)
+            self.contact = aContact
+        } else {
+            // Show Error
+            self.presentOkAlert(title: nil, message: CSConstants.CSLocalizedStringConstants.commonErrorInfo)
         }
     }
 }

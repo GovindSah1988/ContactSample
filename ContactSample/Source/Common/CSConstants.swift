@@ -17,10 +17,22 @@ struct CSConstants {
     /// add all the localized constant here
     struct CSLocalizedStringConstants {
         static let alertOk = "OK"
+        static let alertCancel = "Cancel"
+        static let alertDeleteTitle = "Delete Contact!!"
+        static let alertDeleteMessage = "Are you sure you want to Delete Contact?"
+        static let alertInvalidFirstNameTitle = "Invalid First Name!!"
+        static let alertInvalidFirstNameMessage = "Please enter valid First Name. It must be more than 2 characters."
+        static let alertInvalidLastNameTitle = "Invalid Last Name!!"
+        static let alertInvalidLastNameMessage = "Please enter valid Last Name. It must be more than 2 characters."
+        static let alertInvalidPhoneNumTitle = "Invalid Phone Number!!"
+        static let alertInvalidPhoneNumMessage = "Please enter valid phone number! It must contain only digits and '+' with alteast 10 digits with/without Country Code"
+        static let alertInvalidEmailTitle = "Invalid Email!!"
+        static let alertInvalidEmailMessage = "Please enter valid email id."
         static let commonErrorInfo = "Something Went Wrong. Unable to connect to Server!!"
         static let homeTitle = "Contact"
         static let emptyContent = "No Contents To Show!!"
         static let editAddSuccessMessage = "Contact is successfully updated."
+        static let deleteSuccessMessage = "Contact is successfully deleted."
     }
     
     /// add all the view identifiers here
@@ -40,8 +52,12 @@ struct CSConstants {
         static let accept = "Accept"
         static let contentTypeJson = "application/json"
         static let acceptJson = "application/json"
+        static let multipartContentType = "multipart/form-data"
     }
 
+    struct ParameterConstants {
+        static let image = "image"
+    }
 }
 
 enum CSContactDetailRow: Int {
@@ -86,4 +102,5 @@ enum CSRequestMethod: String {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
+    case delete = "DELETE"
 }

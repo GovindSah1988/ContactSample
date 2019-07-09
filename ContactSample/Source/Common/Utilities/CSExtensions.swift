@@ -48,19 +48,6 @@ public extension UIImageView {
     }
 }
 
-// MARK: - UIViewController Extension
-
-public extension UIViewController {
-    
-    /// to present an alert from a ViewController with onlyModelR OK button.
-    func presentOkAlert(title: String? = nil, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: CSConstants.CSLocalizedStringConstants.alertOk, style: .default)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-}
-
 // MARK: - NSObject Extension
 
 extension NSObject {
@@ -142,6 +129,19 @@ public extension UIButton {
 
 extension String {
     
+    func isValidEmail() -> Bool {
+        let emailRegExpression = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@+[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegExpression)
+        return emailTest.evaluate(with: self)
+    }
+    
+    // phoneNum must be more atleast 10 digit
+    func isValidPhoneNumber() -> Bool {
+        let phoneNumRegExpression = "^[0-9+]{10,}$"
+        let phoneNumTest = NSPredicate(format: "SELF MATCHES %@", phoneNumRegExpression)
+        return phoneNumTest.evaluate(with: self)
+    }
+
     /**
      to remove spaces and hyphen from the phone string
      */
@@ -179,11 +179,21 @@ extension String {
 
 public extension UIViewController {
     
-    /// to present an alert from a ViewController with onlyModelR OK button.
+    /// to present an alert from a ViewController with only OK button.
     func presentOkAlert(title: String? = nil, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: CSConstants.CSLocalizedStringConstants.alertOk, style: .default, handler: handler)
         alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    /// to present an alert from a ViewController with OK and Cancel buttons.
+    func presentOkWithCancelAlert(title: String? = nil, message: String, okhandler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: CSConstants.CSLocalizedStringConstants.alertOk, style: .default, handler: okhandler)
+        let cancelAction = UIAlertAction(title: CSConstants.CSLocalizedStringConstants.alertCancel, style: .default)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
 }

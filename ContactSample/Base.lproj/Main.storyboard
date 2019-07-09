@@ -31,7 +31,6 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo" translatesAutoresizingMaskIntoConstraints="NO" id="POY-OR-tFr">
                                                     <rect key="frame" x="16" y="12" width="40" height="40"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.89803921568627454" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="POY-OR-tFr" secondAttribute="height" multiplier="1:1" id="SJK-ww-M5E"/>
                                                     </constraints>
@@ -142,7 +141,6 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo" translatesAutoresizingMaskIntoConstraints="NO" id="psY-Xc-tDu">
                                         <rect key="frame" x="127" y="26" width="160" height="160"/>
-                                        <color key="backgroundColor" red="0.0" green="0.89803921568627454" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="psY-Xc-tDu" secondAttribute="height" multiplier="1:1" id="ce1-gz-Tij"/>
                                         </constraints>
@@ -297,7 +295,6 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo" translatesAutoresizingMaskIntoConstraints="NO" id="pni-gQ-44d">
                                                 <rect key="frame" x="127" y="26" width="160" height="160"/>
-                                                <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pni-gQ-44d" secondAttribute="height" multiplier="1:1" id="g92-ex-sb0"/>
                                                 </constraints>

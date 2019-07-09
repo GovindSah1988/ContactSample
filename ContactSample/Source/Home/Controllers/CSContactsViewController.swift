@@ -20,7 +20,17 @@ class CSContactsViewController: UIViewController {
         initialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = .white
+    }
+    
+    deinit {
+        deregisterNotifications()
+    }
+    
     private func initialSetup() {
+        self.tableView.sectionIndexColor = .lightGray
         registerNotifications()
         homePresenter = CSHomePresenter(delegate: self)
         reloadContent()
@@ -29,6 +39,10 @@ class CSContactsViewController: UIViewController {
     
     private func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadContent), name: NSNotification.Name.ContentDidUpdate, object: nil)
+    }
+    
+    private func deregisterNotifications() {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc private func reloadContent() {

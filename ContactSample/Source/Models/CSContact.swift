@@ -19,6 +19,7 @@ struct CSContact: Codable {
         case email = "email"
         case phoneNumber = "phone_number"
         case detailUrl = "url"
+        case image = "image"
     }
     
     let id: Int?
@@ -30,6 +31,9 @@ struct CSContact: Codable {
     var phoneNumber: String?
     var detailUrl: String?
 
+    // to upload the image to server
+    var imageData: Data?
+    
     var name: String {
         return firstName.appendNextWord(lastName).capitalized
     }
@@ -69,6 +73,7 @@ struct CSContact: Codable {
         try container.encodeIfPresent(email, forKey: .email)
         try container.encodeIfPresent(phoneNumber, forKey: .phoneNumber)
         try container.encodeIfPresent(detailUrl, forKey: .detailUrl)
+        try container.encodeIfPresent(imageData, forKey: .image)
     }
     
 }

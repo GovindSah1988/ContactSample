@@ -10,32 +10,37 @@ import Foundation
 
 enum CSHomeRequest: CSRequestable {
     case getContacts
-    case getContactDetail(url: String)
+    case getContactDetail(contact: CSContact)
     case saveContact(contact: CSContact)
     case addContact(contact: CSContact)
-
+    case deleteContact(contact: CSContact)
+    
     var baseURL: String? {
         switch self {
         case .getContacts:
             return CSNetworkConstants.APIEndpoints.allContacts
-        case .getContactDetail(let url):
-            return url
+        case .getContactDetail(let contact):
+            return contact.detailUrl ?? CSNetworkConstants.APIEndpoints.allContacts + "/" + String(contact.id!) + ".json"
         case .saveContact(let contact):
             return contact.detailUrl ?? CSNetworkConstants.APIEndpoints.allContacts + "/" + String(contact.id!) + ".json"
         case .addContact(_):
             return CSNetworkConstants.APIEndpoints.allContacts
+        case .deleteContact(let contact):
+            return contact.detailUrl ?? CSNetworkConstants.APIEndpoints.allContacts + "/" + String(contact.id!) + ".json"
         }
     }
     
     var parameters: APIParams? {
         switch self {
         case .getContacts:
-            return fetchContactParams()
+            return nil
         case .getContactDetail(_):
             return nil
         case .saveContact(_):
             return nil
         case .addContact(_):
+            return nil
+        case .deleteContact(_):
             return nil
         }
     }
@@ -48,6 +53,8 @@ enum CSHomeRequest: CSRequestable {
             return CSRequestMethod.put.rawValue
         case .addContact(_):
             return CSRequestMethod.post.rawValue
+        case .deleteContact(_):
+            return CSRequestMethod.delete.rawValue
         }
     }
     
@@ -77,15 +84,5 @@ enum CSHomeRequest: CSRequestable {
             return nil
         }
         return nil
-    }
-}
-
-extension CSHomeRequest {
-    
-    private func fetchContactParams() -> APIParams {
-        var params = APIParams()
-//        params[CSConstants.HeaderConstants.contentType] = CSConstants.HeaderConstants.contentTypeJson
-//        params[CSConstants.HeaderConstants.accept] = CSConstants.HeaderConstants.acceptJson
-        return params
     }
 }
